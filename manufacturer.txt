@@ -1,0 +1,7 @@
+let
+    Source = Excel.CurrentWorkbook(){[Name="A_ORIG"]}[Content],
+    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"A_ORIG_ID", Int64.Type}, {"A_ORIG", type text}, {"A_ORIG_FULL", type text}, {"A_ORIG_FROM", Int64.Type}, {"A_ORIG_UNTIL", Int64.Type}, {"A_ORIG_CLASS", type text}, {"A_ORIG_STATUS", type text}, {"A_ORIG_TO", Int64.Type}, {"A_ORIG_WIKI", type text}, {"A_ORIG_WEB", type text}, {"A_ORIG_EMAIL", type text}, {"A_ORIG_ADD", type text}, {"A_ORIG_ZIP", type text}, {"A_ORIG_TOWN", type text}, {"A_ORIG_TEL", type text}, {"A_ORIG_LOGO", type any}, {"A_ORIG_REM", type text}, {"A_REF_ID", type any}}),
+    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"A_ORIG_ID", "id"}, {"A_ORIG", "name_short"}, {"A_ORIG_FULL", "name"}, {"A_ORIG_FROM", "starting"}, {"A_ORIG_UNTIL", "ending"}, {"A_ORIG_CLASS", "class"}, {"A_ORIG_STATUS", "status"}, {"A_ORIG_TO", "successor"}, {"A_ORIG_WIKI", "wiki"}, {"A_ORIG_WEB", "website"}, {"A_ORIG_EMAIL", "email"}, {"A_ORIG_ADD", "address"}, {"A_ORIG_ZIP", "zip"}, {"A_ORIG_TOWN", "town"}, {"A_ORIG_TEL", "tel"}, {"A_ORIG_LOGO", "logo"}, {"A_ORIG_REM", "notes"}, {"A_REF_ID", "FK_refID"}})
+in
+    #"Renamed Columns"

@@ -1,0 +1,6 @@
+let
+    Source = Excel.CurrentWorkbook(){[Name="A_COUNTRY"]}[Content],
+    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"id", Int64.Type}, {"ISO 3166 code", type text}, {"reg_prefixes", type text}, {"Country_name", type text}, {"from_to", type text}, {"continent", type text}, {"wiki", type text}, {"flag", type text}, {"old_reg", type text}, {"faa", type text}, {"caa", type text}, {"naib", type text}, {"register", type text}, {"google_maps_url", type text}})
+in
+    #"Changed Type"
